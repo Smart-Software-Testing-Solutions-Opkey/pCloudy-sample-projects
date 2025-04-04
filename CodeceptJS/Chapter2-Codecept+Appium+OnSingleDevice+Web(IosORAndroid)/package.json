@@ -1,0 +1,18 @@
+{
+  "name": "codecept-device",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "codeceptjs run --steps",
+	"android" : "PLATFORM=android npx codeceptjs run",
+	"ios" : "PLATFORM=ios npx codeceptjs run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "codeceptjs": "^3.7.3",
+    "webdriverio": "^8.6.3"
+  }
+}
