@@ -1,0 +1,17 @@
+{
+  "name": "codecept-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "codeceptjs run --steps"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "codeceptjs": "^3.7.2",
+    "playwright": "^1.51.1",
+    "playwright-core": "^1.51.1"
+  }
+}

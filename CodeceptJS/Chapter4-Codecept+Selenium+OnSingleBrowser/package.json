@@ -1,0 +1,17 @@
+{
+  "name": "codecept-selenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "codeceptjs run --steps"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/selenium-standalone-service": "^8.15.0",
+    "codeceptjs": "^3.7.2",
+    "webdriverio": "^6.12.1"
+  }
+}
