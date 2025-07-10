@@ -1,0 +1,9 @@
+pre:
+  - uv run sync
+post:
+  - echo "Post Step"
+env:
+  - PCLOUDY_CONF=1
+concurrency: 2
+discoveryCommand: printf "samsung\ngoogle\n"
+runCommand: uv run pytest test_appium.py --device $test
