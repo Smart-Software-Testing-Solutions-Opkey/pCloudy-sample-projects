@@ -1,0 +1,10 @@
+pre:
+  - echo "Running pre step"
+  - echo $UID
+  - ls -lah
+post:
+  - echo "Running post step"
+env:
+  - PCLOUDY_CONF=1
+discoveryCommand: echo test
+runCommand: echo $UID; ls -lah; mvn $test

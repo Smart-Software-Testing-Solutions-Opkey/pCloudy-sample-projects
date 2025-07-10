@@ -1,0 +1,9 @@
+pre:
+  - echo "Running pre step"
+post:
+  - echo "Running post step"
+env:
+  - PCLOUDY_CONF=1
+concurrency: 2
+discoveryCommand: grep 'test name' testng.xml | awk '{print$2}' | sed 's/name=//g' | sed 's/\x3e//g'
+runCommand: mvn test -DselectedTests=$test
