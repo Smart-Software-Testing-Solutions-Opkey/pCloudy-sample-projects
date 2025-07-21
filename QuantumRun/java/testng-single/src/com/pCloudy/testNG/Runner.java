@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -14,6 +15,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -25,7 +28,7 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 public class Runner {
 
 	AppiumDriverLocalService service;
-	AppiumDriver<WebElement> driver;
+	AppiumDriver driver;
 	String folder_name;
 	DateFormat df;
 
@@ -37,13 +40,12 @@ public class Runner {
 	@BeforeMethod
 	public void prepareTest() throws IOException, InterruptedException {
 		
-		String username = "<your username here>";
-		String apiKey = "<your api key here>";
+		String username = "Enter your email-id";
+		String apiKey = "Enter your API Key";
 
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("appium:newCommandTimeout", 600);
 		capabilities.setCapability("appium:launchTimeout", 90000);
-		capabilities.setCapability("appium:platformVersion", "15.0.0");
 		capabilities.setCapability("appium:platformName", "Android");
 		capabilities.setCapability("appium:automationName", "uiautomator2");
 		capabilities.setCapability("appium:appPackage", "com.pcloudy.appiumdemo");
@@ -53,7 +55,7 @@ public class Runner {
 		pcloudyOptions.put("pCloudy_ApiKey", apiKey);
 		pcloudyOptions.put("pCloudy_DurationInMinutes", 10);
 		pcloudyOptions.put("pCloudy_DeviceManufacturer", "SAMSUNG");
-		pcloudyOptions.put("pCloudy_DeviceVersion", "15.0.0");
+		pcloudyOptions.put("pCloudy_DeviceVersion", "13.0.0");
 		pcloudyOptions.put("pCloudy_ApplicationName", "pCloudyAppiumDemo.apk");
 		pcloudyOptions.put("pCloudy_WildNet", false);
 		pcloudyOptions.put("pCloudy_EnableVideo", false);
@@ -61,57 +63,49 @@ public class Runner {
 		pcloudyOptions.put("pCloudy_EnableDeviceLogs", false);
 		pcloudyOptions.put("appiumVersion", "2.0.0");
 		capabilities.setCapability("pcloudy:options", pcloudyOptions);
-		driver = new AndroidDriver(new URL("https://device.pcloudy.com/appiumcloud/wd/hub"), capabilities);
+		driver = new AndroidDriver(new URL("https://ind-west.pcloudy.com/appiumcloud/wd/hub"), capabilities);
 	}
 
 	@Test
-	public void Test() throws IOException, InterruptedException {
+	public void testFlightBooking() throws IOException, InterruptedException {
 
-		// Click on Accept button
-		driver.findElement(By.xpath("//android.widget.Button[@resource-id='com.pcloudy.appiumdemo:id/accept']"))
-				.click();
-		captureScreenShots();
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/accept"), driver).click();
+	    captureScreenShots();
 
-		// Click on Flight button
-		driver.findElement(By.xpath("//android.widget.Button[@resource-id='com.pcloudy.appiumdemo:id/flightButton']"))
-				.click();
-		captureScreenShots();
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/flightButton"), driver).click();
+	    captureScreenShots();
 
-		// Select from location
-		driver.findElement(By.xpath("//android.widget.Spinner[@resource-id='com.pcloudy.appiumdemo:id/spinnerfrom']"))
-				.click();
-		captureScreenShots();
-		driver.findElement(By.xpath(
-				"//android.widget.CheckedTextView[@resource-id='android:id/text1' and @text='Bangalore, India (BLR)']"))
-				.click();
-		captureScreenShots();
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/spinnerfrom"), driver).click();
+	    captureScreenShots();
 
-		// Select to location
-		driver.findElement(By.xpath("//android.widget.Spinner[@resource-id='com.pcloudy.appiumdemo:id/spinnerto']"))
-				.click();
-		captureScreenShots();
-		driver.findElement(By.xpath(
-				"//android.widget.CheckedTextView[@resource-id='android:id/text1' and @text='Pune, India (PNQ)']"))
-				.click();
-		captureScreenShots();
+	    waitForVisibility(By.xpath("//android.widget.CheckedTextView[@text='Bangalore, India (BLR)']"), driver).click();
+	    captureScreenShots();
 
-		// Select one way trip
-		driver.findElement(
-				By.xpath("//android.widget.RadioButton[@resource-id='com.pcloudy.appiumdemo:id/singleTrip']")).click();
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/spinnerto"), driver).click();
+	    captureScreenShots();
 
-		// Select departure time
-		driver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.pcloudy.appiumdemo:id/txtdepart']"))
-				.click();
-		captureScreenShots();
-		driver.findElement(By.xpath("//android.widget.Button[@resource-id='android:id/button1' and @text='OK']"))
-				.click();
-		captureScreenShots();
+	    waitForVisibility(By.xpath("//android.widget.CheckedTextView[@text='Pune, India (PNQ)']"), driver).click();
+	    captureScreenShots();
 
-		// Click on search flights button
-		driver.findElement(By.xpath("//android.widget.Button[@resource-id='com.pcloudy.appiumdemo:id/searchFlights']"))
-				.click();
-		captureScreenShots();
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/singleTrip"), driver).click();
+
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/txtdepart"), driver).click();
+	    captureScreenShots();
+
+	    waitForVisibility(By.id("android:id/button1"), driver).click(); // OK button
+	    captureScreenShots();
+
+	    waitForVisibility(By.id("com.pcloudy.appiumdemo:id/searchFlights"), driver).click();
+	    captureScreenShots();
 	}
+
+	
+	public static WebElement waitForVisibility(By locator, AppiumDriver<?> driver) {
+	    WebDriverWait wait = new WebDriverWait(driver, 10); // 
+	    return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+
+
 
 	@AfterMethod
 	public void endTest() throws IOException {

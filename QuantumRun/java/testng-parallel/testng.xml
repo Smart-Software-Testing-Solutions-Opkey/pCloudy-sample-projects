@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="3" configfailurepolicy="continue" name="pCloudy Suite" parallel="tests">
+
+  <test name="Samsung">
+    <parameter name="deviceName" value="Samsung"/>
+    <parameter name="deviceVersion" value="13.0.0"/>
+    <classes>
+      <class name="com.pCloudy.testNG.Runner"/>
+    </classes>
+  </test>
+
+  <test name="Google">
+    <parameter name="deviceName" value="Google"/>
+    <parameter name="deviceVersion" value="13.0.0"/>
+    <classes>
+      <class name="com.pCloudy.testNG.Runner"/>
+    </classes>
+  </test>
+
+</suite>
